@@ -1,9 +1,12 @@
-#include "addition.h"
+#ifndef _STRINGCONVERSION_H
+#define _STRINGCONVERSION_H
+#include "number.h"
+#include <ctype.h>
 #include <vector>
 #include <iostream>
 
 template<typename T>
-class StringToNumber
+class StringConversion 
 {
 	public:
 	Number<T> number;
@@ -15,7 +18,9 @@ class StringToNumber
 		char* stringIterator = string;
 		while(*stringIterator != '\0')
 		{
-			digits.push_back(*stringIterator-'0');
+			// skip whitespaces, etc.
+			if(isdigit(*stringIterator))
+				digits.push_back(*stringIterator-'0');
 			stringIterator++;
 		}
 
@@ -47,7 +52,7 @@ class StringToNumber
 
 	}
 	public:
-	StringToNumber(char* string)
+	StringConversion(char* string)
 	{
 		
 		// Convert cstring digits to binary digits
@@ -72,11 +77,4 @@ class StringToNumber
 	}
 };
 
-
-int main()
-{
-	StringToNumber<unsigned short> stn("281474976710656");
-	Number<unsigned short> a(1),b(0);
-
-	((a+stn)+stn).print();
-};
+#endif

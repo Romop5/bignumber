@@ -1,3 +1,6 @@
+#ifndef _NUMBER_H
+#define _NUMBER_H
+
 #include <limits>
 #include <cstdlib>
 #include <iostream>
@@ -28,17 +31,17 @@ class Sector
 		return overflow;
 	}
 
-	inline bool operator!=(const Sector<T>& second)
+	inline bool operator!=(const Sector<T>& second) const
 	{
 		return this->value != second.value;
 	}
 
-	inline bool operator>(const Sector<T>& second)
+	inline bool operator>(const Sector<T>& second) const
 	{
 		return this->value > second.value;
 	}
 
-	inline bool operator<(const Sector<T>& second)
+	inline bool operator<(const Sector<T>& second) const
 	{
 		return this->value > second.value;
 	}
@@ -86,7 +89,10 @@ class Number
 			// corrent with overflow
 			currentOverflow |= result.value[i]+overflow;
 			if(addition.value.size() <= i && currentOverflow == false)
+			{
+				overflow = currentOverflow;
 				break;
+			}
 			overflow = currentOverflow;
 		}
 		if(overflow == 1)
@@ -113,7 +119,7 @@ class Number
 		}
 	}
 
-	bool operator==(const Number<T>& second)
+	bool operator==(const Number<T>& second) const
 	{
 		if(this->value.size() != second.value.size())
 			return false;
@@ -125,7 +131,7 @@ class Number
 		return true;
 	}
 
-	bool operator>(const Number<T>& second)
+	bool operator>(const Number<T>& second) const
 	{
 		if(this->value.size() > second.value.size())
 			return true;
@@ -164,3 +170,4 @@ class StringConverter
 };
 
 
+#endif
