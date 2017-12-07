@@ -80,8 +80,6 @@ class NumberConversion
 		for(auto it = digits.rbegin(); it != digits.rend(); it++)
 			result.push_back('0'+(*it));
 
-		// print result
-		std::cout << result << std::endl;	
 	}
 };
 #endif

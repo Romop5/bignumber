@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 
-template <typename T>
+template <typename T = unsigned long long>
 class Sector
 {
 	public:
@@ -62,9 +62,30 @@ std::ostream& operator<<(std::ostream& os, const Sector<T>& obj)
     return os;
 }
 
-template <typename T>
+template <typename T = unsigned long long>
 class Number
 {
+	void shiftLeft()
+	{
+		bool carry = false;
+		bool nextCarry = false;
+		for(auto it = value.begin(); it != value.end(); it++)
+		{
+			// get leftmost bit from lower sector
+			nextCarry = (it->value & (1 << (std::numeric_limits<T>::digits-1)));
+			// shit lower sector
+			it->value <<= 1;
+			// apply current carry
+			if(carry)
+				it->value |= 1;
+			// rotate carry for next round
+			carry = nextCarry;
+		}
+		// extend number in case of last carry
+		if(carry)
+			value.push_back(1);
+	}
+
 	public:
 	std::vector<Sector<T>> value;
 	Number(T start = 0)
@@ -99,6 +120,7 @@ class Number
 			result.value.push_back(Sector<T>(1));
 		return result;
 	}
+
 
 	void setBit(size_t pos, bool value)
 	{
@@ -148,7 +170,31 @@ class Number
 		return false;
 	}
 
+	Number<T> operator++()
+	{
+		Number<T> result = *this;
+		bool carry = true;
+		for(size_t i = 0; i < result.value.size(); i++)
+		{
+			if(!carry)
+				break;
 
+			carry = result.value[i] + carry;
+		}
+		if(carry)
+			result.value.push_back(0);
+	}
+
+	Number<T> operator<<(const size_t shift)
+	{
+		Number<T> result = *this;
+		size_t count = shift;
+		while(count--)
+		{
+			result.shiftLeft();
+		}
+		return result;
+	}
 
 	void print() const
 	{
@@ -159,15 +205,5 @@ class Number
 		std::cout << std::endl;
 	}
 };
-
-class StringConverter
-{
-	template <typename T> 
-	StringConverter(Number<T> input)
-	{
-
-	};
-};
-
 
 #endif

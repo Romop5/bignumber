@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 
-template<typename T>
+template <typename T = unsigned long long>
 class StringConversion 
 {
 	public:
