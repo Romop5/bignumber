@@ -51,4 +51,16 @@ TEST_CASE("Simple conversion")
 
 	REQUIRE(result == lib);
 }
+
+TEST_CASE("Hardcore")
+{
+
+	StringConversion<unsigned char> litA("32000"), litB("32100");
+
+	Number<unsigned char> a (100),b;
+
+	b = litB;
+	REQUIRE((a+litA) == b);
+
+}
 	
