@@ -64,3 +64,26 @@ TEST_CASE("Hardcore")
 
 }
 	
+
+TEST_CASE("Conversion back and forth")
+{
+	std::string testHouseNumero = "1337";
+
+	using T = unsigned char;
+	StringConversion<T> input(testHouseNumero);
+
+	NumberConversion<T> output(input);
+
+	// Strings should be equal
+	REQUIRE(testHouseNumero == output.getValue());
+}
+
+TEST_CASE("Big game")
+{
+	using T = unsigned char;
+	Number<T> a(StringConversion<T>("150 000 000 000 000 000 000 000 000"));
+
+	std::string result = NumberConversion<T>(a+a);
+
+	REQUIRE(result == "300000000000000000000000000");
+}

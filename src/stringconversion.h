@@ -68,6 +68,24 @@ class StringConversion
 		}
 	}
 
+	StringConversion(std::string string)
+	{
+		
+		std::vector<unsigned char> digits;
+		for(auto &x: string)
+			digits.push_back((x)-'0');
+
+		// Convert to binary with division by 2
+		auto bits= digitsToBits(digits);
+
+		// Make up a number from bits
+		for(size_t i = 0; i < bits.size();i++)
+		{
+			number.setBit(i,bits[i]);
+		}
+	}
+
+
 	operator Number<T>() const
 	{
 		std::cout << "returned";
