@@ -16,6 +16,11 @@ class NumberConversion
 	{
 		return result;
 	}
+
+	operator std::string ()
+	{
+		return result;
+	}
 	
 	void multiplyByTwo(std::vector<unsigned char> &digits)
 	{
