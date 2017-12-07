@@ -98,10 +98,12 @@ class Number
 			it->value >>= 1;
 			// apply current carry
 			if(carry)
-				it->value = (1 << (std::numeric_limits<T>::digits-1));
+				it->value |= (1 << (std::numeric_limits<T>::digits-1));
 			// rotate carry for next round
 			carry = nextCarry;
 		}
+		if(value.back().value == 0)
+			value.pop_back();
 	}
 
 
@@ -140,22 +142,42 @@ class Number
 		return result;
 	}
 
-
-	void isEven()
+	Number<T> operator*(const Number<T>& second)
 	{
-		return getBit(0);
+		// let a be > than b
+		Number<T> a = (*this > second)?*this:second;
+		Number<T> b = (!(*this > second))?*this:second;
+
+		if(b == Number<T>(0))
+			return Number<T>(0);
+
+		while(b.isEven())
+		{
+			b.shiftRight();
+			a.shiftLeft();
+		}
+		static Number<T> one(1);
+		if(b == one)
+			return a;
+		b.setBit(0,0);
+		return ((a*b)+a);
 	}
 
-	void getBit(size_t pos)
+	bool isEven()
+	{
+		return !getBit(0);
+	}
+
+	bool getBit(size_t pos)
 	{
 		size_t chunkId = pos/std::numeric_limits<T>::digits;
 		size_t chunkSubPosition = pos%std::numeric_limits<T>::digits;
 		
 
-		if(chuckId >= this->value.size())
+		if(chunkId >= this->value.size())
 			return 0;
 
-		return this->value[chuckId] && (1 << chunkSubPosition);
+		return ((this->value[chunkId].value & (1 << chunkSubPosition)) != 0);
 
 	}
 

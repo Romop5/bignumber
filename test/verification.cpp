@@ -87,3 +87,21 @@ TEST_CASE("Big game")
 
 	REQUIRE(result == "300000000000000000000000000");
 }
+
+Number<unsigned char> num(const std::string & str)
+{
+	return Number<unsigned char>(StringConversion<unsigned char>(str));
+}
+TEST_CASE("Multiplication")
+{
+	REQUIRE(num("1") * num("1")  == num("1"));
+	REQUIRE(num("2") * num("1")  == num("2"));
+	REQUIRE(num("1") * num("2")  == num("2"));
+	REQUIRE(num("50") * num("10")  == num("500"));
+	REQUIRE(num("11") * num("10")  == num("110"));
+	REQUIRE(num("12000") * num("10")  == num("120000"));
+	REQUIRE(num("1500000000") * num("10")  == num("15000000000"));
+	REQUIRE(num("666666666666666") * num("10")  == num("6666666666666660"));
+	REQUIRE(num("123456789") * num("123456789")  == num("15241578750190521"));
+
+}
