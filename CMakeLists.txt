@@ -9,3 +9,9 @@ add_executable(billionTest test/billion.cpp)
 add_executable(equalTest test/conversionTest.cpp)
 add_executable(veri test/verification.cpp)
 add_executable(power2 test/power2.cpp)
+
+
+add_executable(powerperfm test/power2performance.cpp)
+
+
+
