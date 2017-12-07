@@ -1,11 +1,11 @@
-#Bignumber
+# Bignumber
 
 ## What's that ?
-	This is a naive attempt to implement a C++ library supporting addition and multiplication of unlimited integers*. 
+This is a naive attempt to implement a C++ library supporting addition and multiplication of unlimited integers*. 
 
 ## Simple usage
 
-~~~~
+```cpp
 #include "bignumber.h"
 
 using T = unsigned char;
@@ -16,7 +16,7 @@ c = a + b;
 NumberConversion<T> result(c);
 
 std::cout << "Here is the result: " << c.getValue() << std::endl;
-~~~~
+```
 
 
 ## Theory under
