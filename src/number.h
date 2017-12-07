@@ -86,6 +86,25 @@ class Number
 			value.push_back(1);
 	}
 
+	void shiftRight()
+	{
+		bool carry = false;
+		bool nextCarry = false;
+		for(auto it = value.rbegin(); it != value.rend(); it++)
+		{
+			// get rightmost bit from lower sector
+			nextCarry = (it->value & 1);
+
+			it->value >>= 1;
+			// apply current carry
+			if(carry)
+				it->value = (1 << (std::numeric_limits<T>::digits-1));
+			// rotate carry for next round
+			carry = nextCarry;
+		}
+	}
+
+
 	public:
 	std::vector<Sector<T>> value;
 	Number(T start = 0)
@@ -121,6 +140,24 @@ class Number
 		return result;
 	}
 
+
+	void isEven()
+	{
+		return getBit(0);
+	}
+
+	void getBit(size_t pos)
+	{
+		size_t chunkId = pos/std::numeric_limits<T>::digits;
+		size_t chunkSubPosition = pos%std::numeric_limits<T>::digits;
+		
+
+		if(chuckId >= this->value.size())
+			return 0;
+
+		return this->value[chuckId] && (1 << chunkSubPosition);
+
+	}
 
 	void setBit(size_t pos, bool value)
 	{
@@ -195,6 +232,18 @@ class Number
 		}
 		return result;
 	}
+
+	Number<T> operator>>(const size_t shift)
+	{
+		Number<T> result = *this;
+		size_t count = shift;
+		while(count--)
+		{
+			result.shiftRight();
+		}
+		return result;
+	}
+
 
 	void print() const
 	{
