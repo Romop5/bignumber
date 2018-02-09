@@ -1,0 +1,12 @@
+language: cpp
+
+compiler:
+          - gcc
+          - clang
+
+before_script:
+          - mkdir build
+          - cd build
+          - cmake .. -DBIGNUMBER_TEST
+
+script: make && make test
