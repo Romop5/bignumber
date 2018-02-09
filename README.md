@@ -1,7 +1,8 @@
 # Bignumber
+[![Build Status](https://travis-ci.org/Romop5/bignumber.svg?branch=master)](https://travis-ci.org/Romop5/bignumber)
 
 ## What's that ?
-This is a naive attempt to implement a C++ library supporting addition and multiplication of unlimited integers*. 
+This is a naive attempt to implement a C++ library supporting addition and multiplication of unlimited integers\*. 
 
 ## Simple usage
 
@@ -19,7 +20,7 @@ std::cout << "Here is the result: " << c.getValue() << std::endl;
 ```
 
 
-## Theory under
+## Theory under the hood
 
 Each unlimited number is create by conversion of string to a vector of bit chunks. 
 
@@ -28,7 +29,8 @@ Every operation is performed over these vectors. Therefore the time complexity d
 digits and the size of chunk word, according to this relation: [TODO - add image]
 
 ### Conversions
-Conversion is the weakest part of chain in this library. It's rather expensive - for a string number with N digits, it takes at least log2(N) steps to convert a string
+Conversion is the weakest part of chain in this library. It's rather expensive - for a string number with N digits, it takes at least ![log2 (10^N)](https://github.com/Romop5/raw/master/log2.gif "Log2n")
+ steps to convert a string
 to chunks using division by two approach.
 
 The same applies vice versa. To generate a string from chunks, it takes NxV steps, where N is the count of chunks and V is the width of a single chunk.
