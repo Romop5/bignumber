@@ -29,7 +29,7 @@ Every operation is performed over these vectors. Therefore the time complexity d
 digits and the size of chunk word, according to this relation: [TODO - add image]
 
 ### Conversions
-Conversion is the weakest part of chain in this library. It's rather expensive - for a string number with N digits, it takes at least ![log2 (10^N)](https://github.com/Romop5/raw/master/log2.gif "Log2n")
+Conversion is the weakest part of chain in this library. It's rather expensive - for a string number with N digits, it takes at least ![log2 (10^N)](https://github.com/Romop5/bignumber/raw/master/log2.gif "Log2n")
  steps to convert a string
 to chunks using division by two approach.
 
