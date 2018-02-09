@@ -1,7 +1,5 @@
 #define CATCH_CONFIG_MAIN 
-#include "catch/catch.hpp"
-
-
+#include "catch.hpp"
 #include "bignumber.h"
 
 TEST_CASE("Simple additions")

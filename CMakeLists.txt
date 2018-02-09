@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 3.6)
 project (BigNum)
 
+add_subdirectory(vendor)
 
 option(BIGNUMBER_TEST "Compile & run tests" OFF)
 option(BIGNUMBER_EXAMPLES "Compile examples" OFF)
@@ -31,6 +32,7 @@ endif(BIGNUMBER_EXAMPLES)
 
 if(BIGNUMBER_TEST)
 	add_executable(veri test/verification.cpp )
+	target_link_libraries(veri bignumber catch)
 
 	enable_testing()
 	add_test("verification" veri)
