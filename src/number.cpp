@@ -1,4 +1,8 @@
+#ifndef _NUMBER_CPP
+#define _NUMBER_CPP
+#ifndef _NUMBER_H
 #include "number.h"
+#endif
 
 template<typename T>
 void Number<T>::shiftLeft()
@@ -210,4 +214,5 @@ Number<T> Number<T>::operator>>(const size_t shift)
 	}
 	return result;
 }
+#endif
 

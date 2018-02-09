@@ -1,4 +1,8 @@
+#ifndef _STRINGCONVERSION_CPP
+#define _STRINGCONVERSION_CPP
+#ifndef _STRINGCONVERSION_H
 #include "stringconversion.h"
+#endif
 template<typename T>
 std::vector<unsigned char> StringConversion<T>::toDigits(char* string) const
 {
@@ -77,4 +81,4 @@ StringConversion<T>::StringConversion(std::string string)
 		number.setBit(i,bits[i]);
 	}
 }
-
+#endif

@@ -1,4 +1,8 @@
+#ifndef _NUMBERCONVERSION_CPP
+#define _NUMBERCONVERSION_CPP
+#ifndef _NUMBERCONVERSION_H
 #include "numberconversion.h"
+#endif
 
 template<typename T>
 void NumberConversion<T>::multiplyByTwo(std::vector<unsigned char> &digits)
@@ -63,4 +67,4 @@ NumberConversion<T>::NumberConversion(const Number<T>& num)
 		result.push_back('0'+(*it));
 
 }
-
+#endif
